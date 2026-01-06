@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Real Yatra – Train Information</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#eef3ff;
+}
+
+/* TOP BAR */
+.top{
+    background:#1e88e5;
+    color:#fff;
+    padding:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.logo{
+    width:36px;
+    height:36px;
+    background:#fff;
+    color:#1e88e5;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* MAIN CARD */
+.container{
+    max-width:420px;
+    background:white;
+    margin:10px auto 90px;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+h2{
+    margin:0;
+    color:#1e88e5;
+    font-size:18px;
+}
+p.sub{
+    font-size:13px;
+    margin:5px 0 10px;
+    color:#555;
+}
+
+select,input,button,a.book{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    font-size:15px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+button{
+    background:#1e88e5;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+/* BOOK BUTTON */
+a.book{
+    display:block;
+    text-align:center;
+    background:#43a047;
+    color:white;
+    text-decoration:none;
+    border:none;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+/* ARROW INFO */
+.book-info{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    margin-top:8px;
+    font-size:13px;
+    color:#333;
+    background:#f6f9ff;
+    padding:8px;
+    border-radius:6px;
+}
+.arrow{
+    font-size:18px;
+}
+
+/* SECTIONS */
+.section{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    background:#f6f9ff;
+    border-radius:8px;
+}
+.section h3{
+    margin:0 0 8px;
+    color:#1e88e5;
+    font-size:15px;
+}
+.row{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    margin-top:5px;
+}
+
+/* ROUTE */
+.station{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    padding:5px 0;
+    border-bottom:1px dashed #ccc;
+}
+
+/* FOOTER */
+.footer{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    border-top:1px solid #ccc;
+}
+.footer div{
+    padding:10px;
+    font-size:12px;
+}
+
+/* DISCLAIMER */
+.disclaimer{
+    font-size:11px;
+    color:#555;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP -->
+<div class="top">
+    <div class="logo">R</div>
+    <b>Real Yatra</b>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+<h2>Live Train Information</h2>
+<p class="sub">Running Status • Route • Seat • Fare</p>
+
+<select id="searchType" onchange="changeSearch()">
+    <option value="station">From → To Station</option>
+    <option value="number">Train Number</option>
+    <option value="name">Train Name</option>
+</select>
+
+<input id="i1" placeholder="From Station">
+<input id="i2" placeholder="To Station">
+
+<button onclick="searchTrain()">Find Train</button>
+
+<!-- OVERVIEW -->
+<div class="section" id="overview">
+<h3>Train Overview</h3>
+<div class="row"><span>Name</span><span>Rajdhani Express</span></div>
+<div class="row"><span>Number</span><span>12951</span></div>
+<div class="row"><span>Status</span><span>Running</span></div>
+<div class="row"><span>Delay</span><span>+10 min</span></div>
+</div>
+
+<!-- LIVE -->
+<div class="section" id="live">
+<h3>Live Status (Estimated)</h3>
+<div class="row"><span>Last Station</span><span>Kota</span></div>
+<div class="row"><span>Next Station</span><span>Vadodara</span></div>
+<div class="row"><span>ETA</span><span>18:40</span></div>
+</div>
+
+<!-- ROUTE -->
+<div class="section" id="route">
+<h3>Route & Stops</h3>
+<div class="station"><span>New Delhi</span><span>16:30</span></div>
+<div class="station"><span>Kota</span><span>22:10</span></div>
+<div class="station"><span>Vadodara</span><span>04:20</span></div>
+<div class="station"><span>Mumbai Central</span><span>08:10</span></div>
+</div>
+
+<!-- SEAT -->
+<div class="section" id="seat">
+<h3>Seat Availability (Estimated)</h3>
+<div class="row"><span>Sleeper</span><span>🟢 High Chance</span></div>
+<div class="row"><span>3AC</span><span>🟡 Limited</span></div>
+<div class="row"><span>2AC</span><span>🔴 Waiting</span></div>
+</div>
+
+<!-- FARE -->
+<div class="section" id="fare">
+<h3>Fare (Approx)</h3>
+<div class="row"><span>Sleeper</span><span>₹650</span></div>
+<div class="row"><span>3AC</span><span>₹1450</span></div>
+<div class="row"><span>2AC</span><span>₹2100</span></div>
+</div>
+
+<!-- BOOK -->
+<a class="book"
+   href="https://www.irctc.co.in/nget/train-search"
+   target="_blank">
+🎟️ Book Ticket on IRCTC
+</a>
+
+<div class="book-info">
+    <div class="arrow">➡️</div>
+    <div>
+        <b>Train ki sthiti dekhne aur ticket book karne ke liye yahan click kare</b><br>
+        <span>Click here to check train status & book ticket</span>
+    </div>
+</div>
+
+<div class="disclaimer">
+<b>Disclaimer:</b> Real Yatra is a demo platform. Status & seat info are estimated.
+Booking redirects to official IRCTC website.
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div>🏠 Home</div>
+    <div>📍 Live</div>
+    <div>🛏 Seat</div>
+    <div>👤 Profile</div>
+</div>
+
+<script>
+function changeSearch(){
+    let t=document.getElementById("searchType").value;
+    let i1=document.getElementById("i1");
+    let i2=document.getElementById("i2");
+    i2.style.display="none";
+
+    if(t==="station"){
+        i1.placeholder="From Station";
+        i2.placeholder="To Station";
+        i2.style.display="block";
+    }else if(t==="number"){
+        i1.placeholder="Train Number";
+    }else{
+        i1.placeholder="Train Name";
+    }
+}
+
+function searchTrain(){
+    document.getElementById("overview").style.display="block";
+    document.getElementById("live").style.display="block";
+    document.getElementById("route").style.display="block";
+    document.getElementById("seat").style.display="block";
+    document.getElementById("fare").style.display="block";
+}
+</script>
+
+</body>
+</html>
